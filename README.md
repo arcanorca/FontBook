@@ -1,5 +1,9 @@
 # FontChanger
 
+<p align="center">
+  <img src="resources/icons/fontchanger.svg" width="128" />
+</p>
+
 Change the FreeCAD UI font to any system-installed font.
 Works on **all platforms** (Linux, Windows, macOS) and **all packaging formats** (AppImage, Flatpak, native).
 
