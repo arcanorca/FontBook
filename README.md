@@ -38,11 +38,25 @@ If a saved font is not available on the current OS, FontChanger falls back to
 the active system UI font instead of failing silently.
 
 ## How It Works
-FontChanger appends a tagged stylesheet block to FreeCAD's active stylesheet:
+FontChanger dynamically appends a tagged, in-memory stylesheet block (QSS) directly to FreeCAD's active main window stylesheet:
 ```css
+/* FontChanger:start */
 QWidget { font-family: "YourFont"; font-size: 11pt; }
+QLabel, QAbstractButton, QListView, QTreeView { color: #CB333B; }
+/* FontChanger:end */
 ```
-No theme files are modified. The injection is tag-delimited so it can be cleanly replaced or removed.
+No static theme files on your disk are modified. The injection is cleanly isolated using `/* FontChanger:start */` and `/* FontChanger:end */` tags, meaning the custom styles can be instantly updated, replaced, or completely removed on-the-fly via regular expressions. 
+
+### Smart Color Overrides
+When a custom text color is chosen, applying it blindly to `*` or `QWidget` would break the carefully curated semantic colors in data-heavy FreeCAD panels, such as syntax highlighting in the Python console or color-coded cells in Spreadsheet workbenches. 
+
+Instead, FontChanger uses a strict **Allowlist System** to precisely override text colors *only* where it makes sense:
+- General text elements (`QLabel`)
+- All buttons (`QAbstractButton` subclasses including `QPushButton`, `QCheckBox`, `QRadioButton`)
+- Structural dialog lists and trees (`QListView`, `QTreeView`) used in the Tasks Panel and UI sidebars.
+- Data-heavy text inputs and views (like `QTextEdit`, `QTableView`) are explicitly excluded, safely falling back to the underlying FreeCAD theme's native semantic coloring.
+
+This ensures seamless integration with dark or light themes while preserving maximum readability.
 
 ## License
 [LGPL-2.1-or-later](LICENSE)
