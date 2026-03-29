@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
-"""Preference page widgets for FontChanger."""
+"""Preference page widgets for FontBook."""
 
 import html
 from typing import Optional
@@ -14,11 +14,11 @@ SWATCH_BASE_QSS = "border:1px solid #495057;border-radius:4px;"
 
 
 def _tr(text: str) -> str:
-    """Translate FontChanger UI text through Qt when available."""
+    """Translate FontBook UI text through Qt when available."""
 
     translate = getattr(QtCore.QCoreApplication, "translate", None)
     if callable(translate):
-        return translate("FontChanger", text)
+        return translate("FontBook", text)
     return text
 
 
@@ -124,11 +124,11 @@ def _hide_custom_colors_section(dialog: QtWidgets.QColorDialog) -> None:
 
 
 class PreferencePage(QtWidgets.QWidget):
-    """Edit -> Preferences -> Display -> FontChanger."""
+    """Edit -> Preferences -> Display -> FontBook."""
 
     def __init__(self, parent: Optional[QtWidgets.QWidget] = None) -> None:
         super().__init__(parent)
-        self.setWindowTitle(_tr("FontChanger"))
+        self.setWindowTitle(_tr("FontBook"))
 
         self._color = ""
         self._preview_state: Optional[tuple[str, int, str]] = None
@@ -167,7 +167,7 @@ class PreferencePage(QtWidgets.QWidget):
         color_row.addWidget(self.color_swatch)
 
         self.reset_button = QtWidgets.QPushButton(_tr("Reset"))
-        self.reset_button.setObjectName("FontChangerResetButton")
+        self.reset_button.setObjectName("FontBookResetButton")
         self.reset_button.clicked.connect(self._reset_color)
         color_row.addWidget(self.reset_button)
         color_row.addStretch()

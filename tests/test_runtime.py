@@ -152,15 +152,15 @@ def build_fake_environment(
 
 def import_runtime_modules(fake_modules):
     module_names = (
-        "fontchanger.config",
-        "fontchanger.core",
+        "fontbook.config",
+        "fontbook.core",
     )
     for name in module_names:
         sys.modules.pop(name, None)
 
     with mock.patch.dict(sys.modules, fake_modules):
-        config = importlib.import_module("fontchanger.config")
-        core = importlib.import_module("fontchanger.core")
+        config = importlib.import_module("fontbook.config")
+        core = importlib.import_module("fontbook.core")
         core.get_font_families.cache_clear()
         core.get_sorted_font_families.cache_clear()
         core._warned_missing_families.clear()
@@ -266,12 +266,12 @@ class TestCore(unittest.TestCase):
         self.assertIn("14pt", fake_modules["window"].styleSheet())
         self.assertIn("#123456", fake_modules["window"].styleSheet())
 
-    def test_remove_drops_existing_fontchanger_block(self):
+    def test_remove_drops_existing_fontbook_block(self):
         fake_modules = build_fake_environment(
             families=["Ubuntu"],
             app_family="Ubuntu",
-            stylesheet='QWidget { background: #111; }\n/* FontChanger:start */\n'
-            'QWidget { font-family: "Ubuntu"; }\n/* FontChanger:end */\n',
+            stylesheet='QWidget { background: #111; }\n/* FontBook:start */\n'
+            'QWidget { font-family: "Ubuntu"; }\n/* FontBook:end */\n',
         )
         _, core = import_runtime_modules(fake_modules)
 

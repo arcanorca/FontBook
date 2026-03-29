@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
-"""Core runtime behavior for FontChanger."""
+"""Core runtime behavior for FontBook."""
 
 from functools import lru_cache
 from typing import FrozenSet, Optional
@@ -90,12 +90,12 @@ def apply(
 
     resolved_family, used_fallback = resolve_font_family(family)
     if not resolved_family:
-        App.Console.PrintWarning("[FontChanger] No usable fonts found.\n")
+        App.Console.PrintWarning("[FontBook] No usable fonts found.\n")
         return False
 
     if used_fallback and family not in _warned_missing_families:
         App.Console.PrintWarning(
-            f'[FontChanger] "{family}" not found. Using "{resolved_family}" instead.\n'
+            f'[FontBook] "{family}" not found. Using "{resolved_family}" instead.\n'
         )
         _warned_missing_families.add(family)
 
@@ -105,12 +105,12 @@ def apply(
         return True
 
     window.setStyleSheet(base_sheet + desired_block)
-    App.Console.PrintMessage(f"[FontChanger] Applied {resolved_family} {size}pt\n")
+    App.Console.PrintMessage(f"[FontBook] Applied {resolved_family} {size}pt\n")
     return True
 
 
 def remove() -> None:
-    """Remove the FontChanger stylesheet block from the live UI."""
+    """Remove the FontBook stylesheet block from the live UI."""
 
     window = main_window()
     if not window:
@@ -122,7 +122,7 @@ def remove() -> None:
 
 
 def apply_saved() -> None:
-    """Apply the saved configuration if FontChanger is enabled."""
+    """Apply the saved configuration if FontBook is enabled."""
 
     config = FontConfig.load()
     if config.enabled and config.family:
@@ -157,14 +157,14 @@ class StartupReapplyManager(QtCore.QObject):
             self._workbench_hooked = True
         except Exception as exc:
             App.Console.PrintWarning(
-                f"[FontChanger] Could not hook workbenchActivated, continuing without it: {exc}\n"
+                f"[FontBook] Could not hook workbenchActivated, continuing without it: {exc}\n"
             )
 
     def _apply_saved_safe(self, *_args: object) -> None:
         try:
             apply_saved()
         except Exception as exc:
-            App.Console.PrintError(f"[FontChanger] apply_saved failed: {exc}\n")
+            App.Console.PrintError(f"[FontBook] apply_saved failed: {exc}\n")
 
 
 def install_startup_hooks() -> None:

@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
-"""Compatibility wrapper for FontChanger's public API."""
+"""Compatibility wrapper for FontBook's public API."""
 
-from fontchanger import qss
-from fontchanger.config import DEFAULT_SIZE, PARAM_PATH, FontConfig
-from fontchanger.core import (
+from fontbook import qss
+from fontbook.config import DEFAULT_SIZE, PARAM_PATH, FontConfig
+from fontbook.core import (
     StartupReapplyManager,
     apply,
     apply_saved,
@@ -13,7 +13,7 @@ from fontchanger.core import (
     main_window,
     remove,
 )
-from fontchanger.ui import PreferencePage, PreferencePageAdapter
+from fontbook.ui import PreferencePage, PreferencePageAdapter
 
 __all__ = [
     "DEFAULT_SIZE",

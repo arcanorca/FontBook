@@ -2,10 +2,10 @@ import os
 import sys
 import unittest
 
-# Ensure the addon root is in path so 'fontchanger' can be imported natively 
+# Ensure the addon root is in path so 'fontbook' can be imported natively 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fontchanger import qss
+from fontbook import qss
 
 
 class TestQSS(unittest.TestCase):
@@ -79,11 +79,11 @@ class TestQSS(unittest.TestCase):
         self.assertEqual(current_block.strip(), block1.strip())
 
     def test_split_qss_removes_legacy_blocks(self):
-        """Legacy FontChanger tags should still be removed during cleanup."""
+        """Legacy FontBook tags should still be removed during cleanup."""
         legacy_block = (
-            '\n/* FontChanger */\n'
+            '\n/* FontBook */\n'
             'QWidget { font-family: "Arial"; font-size: 10pt; }\n'
-            "/* FontChanger */\n"
+            "/* FontBook */\n"
         )
         base_sheet, current_block = qss.split_qss(
             f"QWidget {{ background: #000; }}{legacy_block}QMenu {{ padding: 2px; }}"
@@ -93,10 +93,10 @@ class TestQSS(unittest.TestCase):
         self.assertEqual(current_block.strip(), legacy_block.strip())
 
     def test_split_qss_strips_orphan_block_to_avoid_ghosts(self):
-        """Broken trailing FontChanger blocks should be discarded safely."""
+        """Broken trailing FontBook blocks should be discarded safely."""
         broken_sheet = (
             "QWidget { background: #000; }\n"
-            "/* FontChanger:start */\n"
+            "/* FontBook:start */\n"
             'QWidget { font-family: "Arial"; font-size: 10pt; }\n'
         )
 

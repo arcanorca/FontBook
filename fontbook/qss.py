@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
-"""Pure QSS parsing and generation for FontChanger."""
+"""Pure QSS parsing and generation for FontBook."""
 
 import re
 from typing import Pattern
 
-QSS_TAG = "/* FontChanger */"
-QSS_START_TAG = "/* FontChanger:start */"
-QSS_END_TAG = "/* FontChanger:end */"
+QSS_TAG = "/* FontBook */"
+QSS_START_TAG = "/* FontBook:start */"
+QSS_END_TAG = "/* FontBook:end */"
 
 QSS_BLOCK_RE: Pattern[str] = re.compile(
     r"\n?" + re.escape(QSS_START_TAG) + r".*?" + re.escape(QSS_END_TAG) + r"\n?",
@@ -97,7 +97,7 @@ PROPERTY_EDITOR_OVERLAY_VALUE_TARGETS = (
 
 
 def build_qss(family: str, size: int, color: str = "") -> str:
-    """Return the tagged stylesheet block managed by FontChanger."""
+    """Return the tagged stylesheet block managed by FontBook."""
 
     rules = f'QWidget {{ font-family: "{family}"; font-size: {size}pt; }}'
     if color:
@@ -120,7 +120,7 @@ def build_qss(family: str, size: int, color: str = "") -> str:
 
 
 def split_qss(sheet: str) -> tuple[str, str]:
-    """Return (sheet_without_fontchanger_blocks, first_fontchanger_block_or_empty)."""
+    """Return (sheet_without_fontbook_blocks, first_fontbook_block_or_empty)."""
 
     matches = []
     for pattern in (QSS_BLOCK_RE, LEGACY_QSS_BLOCK_RE):

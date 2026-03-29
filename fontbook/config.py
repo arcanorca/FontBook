@@ -1,17 +1,17 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
-"""Persistence primitives for FontChanger."""
+"""Persistence primitives for FontBook."""
 
 from dataclasses import dataclass
 
 import FreeCAD as App
 
-PARAM_PATH = "User parameter:BaseApp/Preferences/Mod/FontChanger"
+PARAM_PATH = "User parameter:BaseApp/Preferences/Mod/FontBook"
 DEFAULT_SIZE = 10
 
 
 @dataclass
 class FontConfig:
-    """Persistent user settings for FontChanger."""
+    """Persistent user settings for FontBook."""
 
     family: str = ""
     size: int = DEFAULT_SIZE

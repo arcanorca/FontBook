@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
-  <name>FontChanger</name>
+  <name>FontBook</name>
   <version>1.0.0</version>
   <date>2026-03-29</date>
   <description>Change the FreeCAD UI font to any system-installed font.
 Works on all platforms and packaging formats.</description>
   <maintainer email="nomail@freecad.org">arcanorca</maintainer>
   <license file="LICENSE">LGPL-2.1-or-later</license>
-  <url type="repository" branch="main">https://github.com/arcanorca/FontChanger</url>
-  <icon>resources/icons/fontchanger.svg</icon>
+  <url type="repository" branch="main">https://github.com/arcanorca/FontBook</url>
+  <icon>resources/icons/fontbook.svg</icon>
   <freecadmin>0.21</freecadmin>
   <content>
     <workbench>
-      <classname>FontChangerStub</classname>
+      <classname>FontBookStub</classname>
       <subdirectory>./</subdirectory>
     </workbench>
   </content>
